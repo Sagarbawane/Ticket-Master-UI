@@ -1,5 +1,3 @@
-export const findCustomer = (customers, _id) => {
-  console.log(customers);
-  console.log(_id);
-  return customers.filter((user) => user._id == _id);
+export const findCustomer = (customer, id) => {
+  return customer.find((customer) => customer._id === id);
 };

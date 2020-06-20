@@ -1,34 +1,8 @@
 import axios from "../config/axios";
 import React from "react";
 
-export const postEmployee = (employee) => {
-  return { type: "POST_EMPLOYEE", payload: employee };
-};
-export const editEmployee = (data, _id) => {
-  return { type: "EDIT_EMPLOYEE", payload: { data, _id } };
-};
-
-export const startPostEmployee = (formData) => {
-  return (dispatch) => {
-    console.log(formData);
-    axios
-      .post("/employees", formData, {
-        headers: {
-          "x-auth": localStorage.getItem("authinfo"),
-        },
-      })
-      .then((response) => {
-        const employee = response.data;
-        console.log(employee);
-        dispatch(postEmployee(employee));
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
-};
-export const getEmployee = (data) => {
-  return { type: "GET_EMPLOYEE", payload: data };
+export const Employee = (employee) => {
+  return { type: "ADD_EMPLOYEE", payload: employee };
 };
 
 export const startGetEmployee = () => {
@@ -40,57 +14,73 @@ export const startGetEmployee = () => {
         },
       })
       .then((response) => {
-        const data = response.data;
-        console.log(data);
-        dispatch(getEmployee(data));
+        const employee = response.data;
+        console.log(response);
+        dispatch(Employee(employee));
       })
       .catch((err) => {
         alert(err);
       });
   };
-};
-export const deleteEmployee = (data) => {
-  return { type: "DELETE_EMPLOYEE", payload: data };
 };
 
-export const startRemoveEmployee = (_id) => {
+export const startAddEmployee = (formData) => {
   return (dispatch) => {
-    console.log(_id);
     axios
-      .delete(`/employees/${_id}`, {
+      .post("/employees", formData, {
         headers: {
           "x-auth": localStorage.getItem("authinfo"),
         },
       })
       .then((response) => {
-        const data = response.data;
-        console.log(data);
-        dispatch(deleteEmployee(data));
+        const employee = response.data;
+        console.log(employee);
+        dispatch(Employee(employee));
+      });
+  };
+};
+
+export const EditEmployee = (employee) => {
+  return { type: "EDIT_EMPLOYEE", payload: employee };
+};
+
+export const startEditEmployee = (id, formData) => {
+  return (dispatch) => {
+    axios
+      .put(`/employees/${id}`, formData, {
+        headers: {
+          "x-auth": localStorage.getItem("authinfo"),
+        },
+      })
+      .then((response) => {
+        const employee = response.data;
+        console.log(employee);
+        dispatch(EditEmployee(employee));
       })
       .catch((err) => {
         alert(err);
       });
   };
 };
-export const startEditEmployee = (_id, formData) => {
+
+export const DeleteEmployee = (id) => {
+  return { type: "DELETE_EMPLOYEE", payload: id };
+};
+
+export const startDeleteEmployee = (id) => {
   return (dispatch) => {
-    console.log(`${_id}`);
-    console.log(`${formData}`);
     axios
-      .put(`/employees/${_id}`, formData, {
+      .delete(`/employees/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("authinfo"),
         },
       })
       .then((response) => {
-        const data = response.data;
-        console.log(data);
-        console.log(_id);
-        console.log(data._id);
-        dispatch(editEmployee(data, _id));
+        const employee = response.data;
+        dispatch(DeleteEmployee(employee._id));
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   };
 };

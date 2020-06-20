@@ -1,12 +1,9 @@
-const ticketReducer = (state = [], action) => {
+const initialTicket = [];
+
+const ticketReducer = (state = initialTicket, action) => {
   switch (action.type) {
-    case "POST_TICKET": {
+    case "ADD_TICKET": {
       return state.concat(action.payload);
-    }
-    case "DELETE_TICKET": {
-      return state.filter((ele) => {
-        return ele._id !== action.payload._id;
-      });
     }
     case "EDIT_TICKET": {
       return state.map((ele) => {
@@ -19,9 +16,15 @@ const ticketReducer = (state = [], action) => {
         }
       });
     }
+
+    case "DELETE_TICKET": {
+      return state.filter((ele) => ele._id !== action.payload);
+    }
+
     default: {
       return [].concat(state);
     }
   }
 };
+
 export default ticketReducer;

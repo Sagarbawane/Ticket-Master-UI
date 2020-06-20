@@ -1,28 +1,25 @@
-const departmentReducer = (state = [], action) => {
+const intialDepartment = [];
+
+const departmentReducer = (state = intialDepartment, action) => {
   switch (action.type) {
-    case "POST_DEPARTMENT": {
+    case "ADD_DEPARTMENT": {
       return state.concat(action.payload);
     }
+
     case "EDIT_DEPARTMENT": {
       return state.map((ele) => {
-        console.log(action.payload._id);
-        if (ele._id == action.payload._id) {
-          console.log(ele._id == action.payload._id);
-          return Object.assign({}, ele, action.payload.data);
+        if (ele._id === action.payload._id) {
+          return Object.assign({}, ele, action.payload);
         } else {
           return Object.assign({}, ele);
         }
       });
     }
 
-    case "GET_DEPARTMENT": {
-      return state.concat(action.payload);
-    }
     case "DELETE_DEPARTMENT": {
-      return state.filter((ele) => {
-        return ele._id !== action.payload._id;
-      });
+      return state.filter((ele) => ele._id !== action.payload);
     }
+
     default: {
       return [].concat(state);
     }

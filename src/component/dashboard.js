@@ -2,10 +2,19 @@ import React from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import { startGetLogout } from "../action/userAction";
 import { connect } from "react-redux";
-import Customer from "./customers";
-import Department from "./department";
-import Employee from "./employees";
-import Ticket from "./ticket";
+import Customer from "./customers/customers";
+import Departments from "./departments/departments";
+import Employees from "./employees/employees";
+import Tickets from "./tickets/tickets";
+import CustomerView from "./customers/CustomerView";
+import customerEdit from "./customers/customerEdit";
+import DepartmentView from "./departments/departmentView";
+import DepartmentEdit from "./departments/departmentEdit";
+import EmployeeEdit from "./employees/employeeEdit";
+import EmployeeView from "./employees/employeeView";
+import TicketView from "./tickets/ticketView";
+import TicketEdit from "./tickets/ticketEdit";
+import TicketInfo from "./customers/ticketInfo";
 
 class Dashbaord extends React.Component {
   handleLogout = () => {
@@ -40,9 +49,43 @@ class Dashbaord extends React.Component {
             </Link>
 
             <Route path="/customers" component={Customer} exact={true} />
-            <Route path="/department" component={Department} exact={true} />
-            <Route path="/employee" component={Employee} exact={true} />
-            <Route path="/ticket" component={Ticket} exact={true} />
+            <Route
+              path="/customers/edit/:id"
+              component={customerEdit}
+              exact={true}
+            />
+            <Route
+              path="/customers/:id"
+              component={CustomerView}
+              exact={true}
+            />
+            <Route path="/department" component={Departments} exact={true} />
+            <Route
+              path="/department/:id"
+              component={DepartmentView}
+              exact={true}
+            />
+            <Route
+              path="/department/edit/:id"
+              component={DepartmentEdit}
+              exact={true}
+            />
+            <Route path="/employee" component={Employees} exact={true} />
+            <Route path="/employee/:id" component={EmployeeView} exact={true} />
+            <Route
+              path="/employee/edit/:id"
+              component={EmployeeEdit}
+              exact={true}
+            />
+            <Route path="/ticket" component={Tickets} exact={true} />
+            <Route path="/ticket/:id" component={TicketView} exact={true} />
+            <Route
+              path="/ticket/edit/:id"
+              component={TicketEdit}
+              exact={true}
+            />
+
+            <Route path="/ticketinfo" component={TicketInfo}></Route>
           </BrowserRouter>
         </header>
       </div>
