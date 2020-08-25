@@ -1,4 +1,5 @@
 # Ticket-Master-UI
+# Overview
 This project enables the user to generate tickets, which keeps track of work given to specific department and status of that work i.e pending or completed.Their are four field customers ,department,employee and tickets which are related/connected with each other to generate final ticket.
 
 # Dependencies/Packages
